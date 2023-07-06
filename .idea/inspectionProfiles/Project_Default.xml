@@ -1,0 +1,60 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="20">
+            <item index="0" class="java.lang.String" itemvalue="fastapi" />
+            <item index="1" class="java.lang.String" itemvalue="pydantic" />
+            <item index="2" class="java.lang.String" itemvalue="uvicorn" />
+            <item index="3" class="java.lang.String" itemvalue="django-sekizai" />
+            <item index="4" class="java.lang.String" itemvalue="django-treebeard" />
+            <item index="5" class="java.lang.String" itemvalue="djangocms-video" />
+            <item index="6" class="java.lang.String" itemvalue="easy_thumbnails" />
+            <item index="7" class="java.lang.String" itemvalue="djangocms-admin-style" />
+            <item index="8" class="java.lang.String" itemvalue="djangocms-style" />
+            <item index="9" class="java.lang.String" itemvalue="djangocms-file" />
+            <item index="10" class="java.lang.String" itemvalue="djangocms-icon" />
+            <item index="11" class="java.lang.String" itemvalue="django-cms" />
+            <item index="12" class="java.lang.String" itemvalue="djangocms-googlemap" />
+            <item index="13" class="java.lang.String" itemvalue="django-classy-tags" />
+            <item index="14" class="java.lang.String" itemvalue="djangocms-text-ckeditor" />
+            <item index="15" class="java.lang.String" itemvalue="djangocms-link" />
+            <item index="16" class="java.lang.String" itemvalue="django-mptt" />
+            <item index="17" class="java.lang.String" itemvalue="django-filer" />
+            <item index="18" class="java.lang.String" itemvalue="djangocms-picture" />
+            <item index="19" class="java.lang.String" itemvalue="djangocms-bootstrap4" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E265" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+          <option value="N806" />
+          <option value="N803" />
+          <option value="N801" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="app.adapters" />
+          <option value="AMZ_Click_v3.Ui_MainWindow.clicked" />
+          <option value="AMZ_Click_v3.Ui_MainWindow.value" />
+          <option value="django.utils.encoding.python_2_unicode_compatible" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
