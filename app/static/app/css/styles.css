@@ -491,6 +491,16 @@ progress {
   font-weight: 300;
 }
 
+.image-container {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.image-container img {
+max-height: 1px;
+}
+
 .display-1 {
   font-size: calc(1.625rem + 4.5vw);
   font-weight: 300;
@@ -501,6 +511,13 @@ progress {
     font-size: 5rem;
   }
 }
+
+.container-custom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+  }
 
 .display-2 {
   font-size: calc(1.575rem + 3.9vw);
@@ -625,8 +642,12 @@ progress {
   color: #6c757d;
 }
 
+.container-fluid{
+  margin-right: 0px;
+  margin-left: -10px;
+}
+
 .container,
-.container-fluid,
 .container-xxl,
 .container-xl,
 .container-lg,
@@ -3230,6 +3251,7 @@ textarea.form-control-lg {
 .dropdown-toggle:empty::after {
   margin-left: 0;
 }
+
 
 .dropdown-menu {
   --bs-dropdown-zindex: 1000;

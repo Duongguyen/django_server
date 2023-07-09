@@ -1,47 +1,74 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+
+from .form import BlogForm, CreateUserForm, PhotoForm
 from .models import *
 import json
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
 
-# def detail(request):
-#     global order
-#     if request.user.is_authenticated:
-#         customer = request.user
-#         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-#         items = order.orderitem_set.all()
-#         cartItems = order.get_cart_items
-#         user_not_login = "hidden"
-#         user_login = "show"
-#     else:
-#         items = []
-#         order = {'get_cart_items': 0, 'get_cart_total': 0}
-#         cartItems = order['get_cart_items']
-#         user_not_login = "show"
-#         user_login = "hidden"
-#     id = request.GET.get('id', '')
-#     products = Product.objects.filter(id=id)
-#     categories = Category.objects.filter(is_sub=False)
-#     context = {'products': products,
-#                'categories': categories,
-#                'items': items,
-#                'order': order, 'cartItems': cartItems,
-#                'user_not_login': user_not_login,
-#                'user_login': user_login}
-#     return render(request, 'app/detail.html', context)
+def save_blog(request):
+    if request.method == 'POST':
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            blog = form.save(commit=False)  # Lưu form nhưng chưa commit vào cơ sở dữ liệu
+            blog.image = request.FILES['image']
+            blog.save()  # Lưu dữ liệu từ form vào bảng Blog
+            return render(request, 'app/input_blog.html', {'form': form})  # Chuyển hướng đến trang thành công sau khi lưu dữ liệu
+    else:
+        form = BlogForm()
+    return render(request, 'app/base.html', {'form': form})
+
+
+def save_photo(request):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST)
+        if form.is_valid():
+            photos = form.save(commit=False)  # Lưu form nhưng chưa commit vào cơ sở dữ liệu
+            photos.image = request.FILES['image']
+            photos.save()
+            # Lưu dữ liệu từ form vào bảng Blog
+            return render(request, 'app/input_photo.html', {'form': form})  # Chuyển hướng đến trang thành công sau khi lưu dữ liệu
+    else:
+        form = BlogForm()
+    return render(request, 'app/base.html', {'form': form})
+
+
+def blog(request):
+    return render(request, 'app/input_blog.html')
+
 
 def base(request):
     return render(request, 'app/base.html')
 
 
-def category(request):
-    categories = Category.objects.filter(is_sub=False)
+def photo(request):
+    return render(request, 'app/input_photo.html')
+
+
+def table(request):
+    if request.user.is_authenticated:
+        photos = Photo.objects.all()
+        if photos:
+            return render(request, 'app/tables_photo.html', {'photos': photos})
+    return render(request, 'app/tables_photo.html', {'photos': photos})
+
+
+def tables(request):
+    if request.user.is_authenticated:
+        photos = Blog.objects.all()
+        if photos:
+            return render(request, 'app/tables_blog.html', {'photos': photos})
+    return render(request, 'app/tables_blog.html', {'photos': photos})
+
+
+def category_blog(request):
+    categories = CategoryBlog.objects.filter(is_sub=False)
     active_category = request.GET.get('category', '')
     if active_category:
-        products = Product.objects.filter(category__slug=active_category)
+        products = Blog.objects.filter(category__slug=active_category)
     context = {'categories': categories, 'products': products, 'active_category': active_category}
     return render(request, 'app/category.html', context)
 
