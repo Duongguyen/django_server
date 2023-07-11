@@ -512,6 +512,27 @@ max-height: 1px;
   }
 }
 
+.myDiv {
+  margin-left: 50px;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.delete-button svg {
+  width: 16px;
+  height: 16px;
+  color: #ff0000; /* Màu sắc của biểu tượng xóa */
+}
+
+.delete-button:hover svg {
+  color: #cc0000; /* Màu sắc của biểu tượng xóa khi di chuột qua */
+}
+
 .container-custom {
     display: flex;
     justify-content: center;

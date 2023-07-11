@@ -18,25 +18,24 @@
     <div class="container-fluid px-0 mt-0">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Trang quản trị nội dung</a>
+            <a class="navbar-brand ps-3" href="{% url '' %}">Trang quản trị nội dung</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                <div class="input-group" style="visibility: {{user_login}}">
+
                 </div>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" ><i class="fas fa-user fa-fw" style="transform: translate(-3px, 0px);"></i><span style="color: white; transform: translate(18px, 16px);">{{request.user}}</span></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -86,8 +85,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
+                                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                            <a class="nav-link" href="{% url 'register' %}">Register</a>
                                             <a class="nav-link" href="password.html">Forgot Password</a>
                                         </nav>
                                     </div>
@@ -106,19 +105,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sb-sidenav-footer">
+                    <div class="sb-sidenav-footer" style="visibility: {{user_login}}">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        {{request.user}}
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
+                <main style="transform: translate(-130px, -50px);">
                     <div class="container-fluid px-1">
-                        <h1 class="mt-4" style="transform: translate(-130px, -50px);">Tables</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Tables</li>
-                        </ol>
+                    <div class="container-fluid" id="myDiv">
+                        <h1 class="mt-4" style="transform: translate(-80px, -30px);">Bài viết</h1>
+                <a href="{% url '' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="black" class="bi bi-house-fill" viewBox="0 0 16 16" style="transform: translate(15px, 15px);">
+                      <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+                      <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+                    </svg>
+                </a>
+
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16" style="transform: translate(24px, 18px);">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                     </svg>
+
+                <a class="dropdown-item" href="{% url 'tables' %}" style="transform: translate(87px, -10px);">Danh mục bài viết</a>
+                        <a href="{% url 'input' %}">
+                            <button type="button" class="btn btn-primary" style="transform: translate(1125px, -30px); width: 9.5%">Thêm bài viết</button>
+                        </a>
 
                         <div class="card mb-4">
                             <div class="card-header">
@@ -126,9 +138,12 @@
                                 Quản lí bài viết
                             </div>
                             <div class="card-body">
+                                <form method="post" action="{% url 'tables' %}">
+                                    {% csrf_token %}
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                            <th>Chọn</th>
                                             <th>Số thứ tự</th>
                                             <th>Tên bài viết</th>
                                             <th>Tiêu đề</th>
@@ -137,10 +152,12 @@
                                             <th>Nội dung</th>
                                             <th>Ngày đăng</th>
                                             <th>Ảnh</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>Chọn</th>
                                             <th>Số thứ tự</th>
                                             <th>Tên bài viết</th>
                                             <th>Tiêu đề</th>
@@ -149,11 +166,15 @@
                                             <th>Nội dung</th>
                                             <th>Ngày đăng</th>
                                             <th>Ảnh</th>
+                                            <th></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         {% for photo in photos %}
                                         <tr>
+                                          <td>
+                                              <input name="delete_id" type="checkbox" value="{{ photo.id }}">
+                                          </td>
                                           <td>{{ photo.stt }}</td>
                                           <td>{{ photo.category }}</td>
                                           <td>{{ photo.title }}</td>
@@ -164,12 +185,30 @@
                                           <td>
                                                 <img src="{{ photo.ImageURL }}" alt="{{ photo.name }}" height="30px">
                                           </td>
+                                          <td>
+                                        <button type="submit" name="delete_id" value="{{ photo.id }}" class="delete-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                            </svg>
+                                        </button>
+
+                                        <button type="submit" name="edit_id" value="{{ photo.id }}" class="edit-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>
+                                        </button>
+                                          </td>
                                         </tr>
                                         {% endfor %}
                                       </tbody>
                                 </table>
+                                    <button type="submit" class="btn btn-danger" id="deleteButton" style="  position: fixed;  top: 101.5px; right: 55px;">Xóa</button>
+                                </form>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

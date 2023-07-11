@@ -12,10 +12,28 @@ from django.contrib.auth import authenticate, login, logout
 def save_blog(request):
     if request.method == 'POST':
         form = BlogForm(request.POST)
+        if request.method == 'POST' and 'edit_id' in request.POST:
+            edit_id = request.POST['edit_id']
+            try:
+                # Lấy thông tin sửa đổi từ request.POST và cập nhật vào đối tượng photo
+                blogs = Blog.objects.get(id=edit_id)
+                blogs.delete()
+                blogs.stt = request.POST.get('stt')
+                blogs.category = request.POST.get('category')
+                blogs.title = request.POST.get('title')
+                blogs.image = request.POST.get('image')
+                blogs.source = request.request.POST.get('source')
+                blogs.description = request.POST.get('description')
+                blogs.publication_date = request.POST.get('publication_date')
+                blogs.poster = request.POST.get('poster')
+                blogs.save()
+                return redirect('input')  # Điều hướng người dùng đến trang bảng sau khi chỉnh sửa thành công
+            except Blog.DoesNotExist:
+                pass  # Xử lý trường hợp dữ liệu không tồn tại
         if form.is_valid():
-            blog = form.save(commit=False)  # Lưu form nhưng chưa commit vào cơ sở dữ liệu
-            blog.image = request.FILES['image']
-            blog.save()  # Lưu dữ liệu từ form vào bảng Blog
+            blogs = form.save(commit=False)  # Lưu form nhưng chưa commit vào cơ sở dữ liệu
+            blogs.image = request.FILES['image']
+            blogs.save()  # Lưu dữ liệu từ form vào bảng Blog
             return render(request, 'app/input_blog.html', {'form': form})  # Chuyển hướng đến trang thành công sau khi lưu dữ liệu
     else:
         form = BlogForm()
@@ -25,14 +43,27 @@ def save_blog(request):
 def save_photo(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST)
+        if request.method == 'POST' and 'edit_id' in request.POST:
+            edit_id = request.POST['edit_id']
+            try:
+                # Lấy thông tin sửa đổi từ request.POST và cập nhật vào đối tượng photo
+                photo = Photo.objects.get(id=edit_id)
+                photo.delete()
+                photo.name = request.POST.get('name')
+                photo.category = request.POST.get('category')
+                photo.description = request.POST.get('description')
+                photo.image = request.POST.get('image')
+                photo.save()
+                return redirect('photo')  # Điều hướng người dùng đến trang bảng sau khi chỉnh sửa thành công
+            except Photo.DoesNotExist:
+                pass  # Xử lý trường hợp dữ liệu không tồn tại
         if form.is_valid():
-            photos = form.save(commit=False)  # Lưu form nhưng chưa commit vào cơ sở dữ liệu
-            photos.image = request.FILES['image']
-            photos.save()
-            # Lưu dữ liệu từ form vào bảng Blog
+            blog = form.save(commit=False)  # Lưu form nhưng chưa commit vào cơ sở dữ liệu
+            blog.image = request.FILES['image']
+            blog.save()  # Lưu dữ liệu từ form vào bảng Blog
             return render(request, 'app/input_photo.html', {'form': form})  # Chuyển hướng đến trang thành công sau khi lưu dữ liệu
     else:
-        form = BlogForm()
+        form = PhotoForm()
     return render(request, 'app/base.html', {'form': form})
 
 
@@ -41,7 +72,16 @@ def blog(request):
 
 
 def base(request):
-    return render(request, 'app/base.html')
+    if request.user.is_authenticated:
+        user_not_login = "hidden"
+        user_login = "show"
+    else:
+        user_not_login = "show"
+        user_login = "hidden"
+    context = {'user_not_login': user_not_login,
+               'user_login': user_login}
+
+    return render(request, 'app/base.html', context)
 
 
 def photo(request):
@@ -50,18 +90,74 @@ def photo(request):
 
 def table(request):
     if request.user.is_authenticated:
+        if request.method == 'POST' and 'delete_id' in request.POST:
+            # Lấy id của dữ liệu cần xóa từ request.POST
+            delete_id = request.POST.getlist('delete_id')
+
+            # Thực hiện xóa dữ liệu từ cơ sở dữ liệu
+            try:
+                photo = Photo.objects.filter(id__in=delete_id)
+                photo.delete()
+            except Photo.DoesNotExist:
+                pass  # Xử lý trường hợp dữ liệu không tồn tại
+
+        if request.method == 'POST' and 'edit_id' in request.POST:
+            edit_id = request.POST['edit_id']
+            try:
+                photo = Photo.objects.get(id=edit_id)
+                if request.method == 'POST':
+                    # Lấy thông tin sửa đổi từ request.POST và cập nhật vào đối tượng photo
+                    photo = Photo.objects.get(id=edit_id)
+                    photo.delete()
+                    save_blog(request)
+                    return redirect('photo')  # Điều hướng người dùng đến trang bảng sau khi chỉnh sửa thành công
+
+                return render(request, 'app/input_photo.html', {'photo': photo})
+            except Photo.DoesNotExist:
+                pass  # Xử lý trường hợp dữ liệu không tồn tại
+
+        # Lấy danh sách dữ liệu từ cơ sở dữ liệu
         photos = Photo.objects.all()
-        if photos:
-            return render(request, 'app/tables_photo.html', {'photos': photos})
-    return render(request, 'app/tables_photo.html', {'photos': photos})
+
+        return render(request, 'app/tables_photo.html', {'photos': photos})
+
+    return render(request, 'app/tables_photo.html', {'photos': None})
 
 
 def tables(request):
     if request.user.is_authenticated:
+        if request.method == 'POST' and 'delete_id' in request.POST:
+            # Lấy id của dữ liệu cần xóa từ request.POST
+            delete_id = request.POST.getlist('delete_id')
+
+            # Thực hiện xóa dữ liệu từ cơ sở dữ liệu
+            try:
+                photo = Blog.objects.filter(id__in=delete_id)
+                photo.delete()
+            except Blog.DoesNotExist:
+                pass  # Xử lý trường hợp dữ liệu không tồn tại
+
+        if request.method == 'POST' and 'edit_id' in request.POST:
+            edit_id = request.POST['edit_id']
+            try:
+                photo = Blog.objects.get(id=edit_id)
+                if request.method == 'POST':
+                    # Lấy thông tin sửa đổi từ request.POST và cập nhật vào đối tượng photo
+                    photo = Blog.objects.get(id=edit_id)
+                    photo.delete()
+                    save_blog(request)
+                    return redirect('input')  # Điều hướng người dùng đến trang bảng sau khi chỉnh sửa thành công
+
+                return render(request, 'app/input_blog.html', {'photo': photo})
+            except Blog.DoesNotExist:
+                pass  # Xử lý trường hợp dữ liệu không tồn tại
+
+        # Lấy danh sách dữ liệu từ cơ sở dữ liệu
         photos = Blog.objects.all()
-        if photos:
-            return render(request, 'app/tables_blog.html', {'photos': photos})
-    return render(request, 'app/tables_blog.html', {'photos': photos})
+
+        return render(request, 'app/tables_blog.html', {'photos': photos})
+
+    return render(request, 'app/tables_blog.html', {'photos': None})
 
 
 def category_blog(request):
