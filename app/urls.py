@@ -13,4 +13,5 @@ urlpatterns = [
     path('table/', views.table, name="table"),
     path('save/', views.save_blog, name="save"),
     path('submit/', views.save_photo, name="submit"),
+    path('users/', views.users, name="users"),
 ]

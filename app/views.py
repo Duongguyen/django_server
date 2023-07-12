@@ -7,6 +7,7 @@ from .models import *
 import json
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 
 def save_blog(request):
@@ -68,7 +69,10 @@ def save_photo(request):
 
 
 def blog(request):
-    return render(request, 'app/input_blog.html')
+    if request.user.is_authenticated:
+        return render(request, 'app/input_blog.html')
+    else:
+        return loginA(request)
 
 
 def base(request):
@@ -85,7 +89,10 @@ def base(request):
 
 
 def photo(request):
-    return render(request, 'app/input_photo.html')
+    if request.user.is_authenticated:
+        return render(request, 'app/input_photo.html')
+    else:
+        return loginA(request)
 
 
 def table(request):
@@ -158,6 +165,23 @@ def tables(request):
         return render(request, 'app/tables_blog.html', {'photos': photos})
 
     return render(request, 'app/tables_blog.html', {'photos': None})
+
+
+def users(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST' and 'delete_id' in request.POST:
+            # Lấy id của dữ liệu cần xóa từ request.POST
+            delete_id = request.POST.getlist('delete_id')
+
+            # Thực hiện xóa dữ liệu từ cơ sở dữ liệu
+            try:
+                users = User.objects.filter(id__in=delete_id)
+                users.delete()
+            except User.DoesNotExist:
+                pass  # Xử lý trường hợp dữ liệu không tồn tại
+        users = User.objects.all()
+        return render(request, 'app/user.html', {'users': users})
+    return render(request, 'app/user.html', {'photos': None})
 
 
 def category_blog(request):

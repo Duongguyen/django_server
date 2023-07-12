@@ -2032,6 +2032,9 @@ max-height: 1px;
   color: #6c757d;
 }
 
+
+
+
 .form-control, .datatable-input {
   display: block;
   width: 100%;
@@ -2055,7 +2058,7 @@ max-height: 1px;
   }
 }
 .form-control[type=file], [type=file].datatable-input {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .form-control[type=file]:not(:disabled):not([readonly]), [type=file].datatable-input:not(:disabled):not([readonly]) {
   cursor: pointer;
