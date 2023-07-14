@@ -62,3 +62,12 @@ class Photo(models.Model):
         except:
             url = ''
         return url
+
+
+class Customer(models.Model):
+    name = models.CharField(max_length=200, null=False)
+    email = models.EmailField(max_length=200, null=False)
+    phone = models.CharField(max_length=200, null=False)
+
+    def __str__(self):
+        return self.name

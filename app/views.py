@@ -1,8 +1,8 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 
-from .form import BlogForm, CreateUserForm, PhotoForm
+from .form import BlogForm, CreateUserForm, PhotoForm, UserUpdateForm, CustomerForm
 from .models import *
 import json
 from django.contrib.auth.forms import UserCreationForm
@@ -11,61 +11,76 @@ from django.contrib.auth.models import User
 
 
 def save_blog(request):
-    if request.method == 'POST':
-        form = BlogForm(request.POST)
-        if request.method == 'POST' and 'edit_id' in request.POST:
-            edit_id = request.POST['edit_id']
-            try:
-                # Lấy thông tin sửa đổi từ request.POST và cập nhật vào đối tượng photo
-                blogs = Blog.objects.get(id=edit_id)
-                blogs.delete()
-                blogs.stt = request.POST.get('stt')
-                blogs.category = request.POST.get('category')
-                blogs.title = request.POST.get('title')
-                blogs.image = request.POST.get('image')
-                blogs.source = request.request.POST.get('source')
-                blogs.description = request.POST.get('description')
-                blogs.publication_date = request.POST.get('publication_date')
-                blogs.poster = request.POST.get('poster')
-                blogs.save()
-                return redirect('input')  # Điều hướng người dùng đến trang bảng sau khi chỉnh sửa thành công
-            except Blog.DoesNotExist:
-                pass  # Xử lý trường hợp dữ liệu không tồn tại
-        if form.is_valid():
-            blogs = form.save(commit=False)  # Lưu form nhưng chưa commit vào cơ sở dữ liệu
-            blogs.image = request.FILES['image']
-            blogs.save()  # Lưu dữ liệu từ form vào bảng Blog
-            return render(request, 'app/input_blog.html', {'form': form})  # Chuyển hướng đến trang thành công sau khi lưu dữ liệu
-    else:
-        form = BlogForm()
-    return render(request, 'app/base.html', {'form': form})
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = BlogForm(request.POST)
+            if form.is_valid():
+                blogs = form.save(commit=False)
+                blogs.image = request.FILES['image']
+                blogs.save()  # Lưu dữ liệu từ form vào bảng Blog
+                return render(request, 'app/customer.html', {'form': form})
+        else:
+            form = CustomerForm()
+        return render(request, 'app/base.html', {'form': form})
 
 
 def save_photo(request):
-    if request.method == 'POST':
-        form = PhotoForm(request.POST)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = PhotoForm(request.POST)
+            if form.is_valid():
+                blog = form.save(commit=False)
+                blog.image = request.FILES['image']
+                blog.save()
+                return render(request, 'app/input_photo.html', {'form': form})
+        else:
+            form = PhotoForm()
+        return render(request, 'app/base.html', {'form': form})
+
+
+def save_customer(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CustomerForm(request.POST)
+            if form.is_valid():
+                customers = form.save(commit=False)
+                customers.save()
+                return render(request, 'app/customer.html', {'form': form})
+        else:
+            form = PhotoForm()
+        return render(request, 'app/base.html', {'form': form})
+
+
+def customer_tables(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST' and 'delete_id' in request.POST:
+            delete_id = request.POST.getlist('delete_id')
+
+            try:
+                customers = Customer.objects.filter(id__in=delete_id)
+                customers.delete()
+            except Customer.DoesNotExist:
+                pass
+
         if request.method == 'POST' and 'edit_id' in request.POST:
             edit_id = request.POST['edit_id']
             try:
-                # Lấy thông tin sửa đổi từ request.POST và cập nhật vào đối tượng photo
-                photo = Photo.objects.get(id=edit_id)
-                photo.delete()
-                photo.name = request.POST.get('name')
-                photo.category = request.POST.get('category')
-                photo.description = request.POST.get('description')
-                photo.image = request.POST.get('image')
-                photo.save()
-                return redirect('photo')  # Điều hướng người dùng đến trang bảng sau khi chỉnh sửa thành công
-            except Photo.DoesNotExist:
-                pass  # Xử lý trường hợp dữ liệu không tồn tại
-        if form.is_valid():
-            blog = form.save(commit=False)  # Lưu form nhưng chưa commit vào cơ sở dữ liệu
-            blog.image = request.FILES['image']
-            blog.save()  # Lưu dữ liệu từ form vào bảng Blog
-            return render(request, 'app/input_photo.html', {'form': form})  # Chuyển hướng đến trang thành công sau khi lưu dữ liệu
-    else:
-        form = PhotoForm()
-    return render(request, 'app/base.html', {'form': form})
+                customers = Customer.objects.get(id=edit_id)
+                if request.method == 'POST':
+                    customers = Customer.objects.get(id=edit_id)
+                    customers.delete()
+                    save_blog(request)
+                    return redirect('photo')
+
+                return render(request, 'app/customer.html', {'customers': customers})
+            except Customer.DoesNotExist:
+                pass
+
+        customers = Customer.objects.all()
+
+        return render(request, 'app/tables_customer.html', {'customers': customers})
+
+    return render(request, 'app/tables_customer.html', {'customers': None})
 
 
 def blog(request):
@@ -95,35 +110,38 @@ def photo(request):
         return loginA(request)
 
 
+def customer(request):
+    if request.user.is_authenticated:
+        return render(request, 'app/customer.html')
+    else:
+        return loginA(request)
+
+
 def table(request):
     if request.user.is_authenticated:
         if request.method == 'POST' and 'delete_id' in request.POST:
-            # Lấy id của dữ liệu cần xóa từ request.POST
             delete_id = request.POST.getlist('delete_id')
 
-            # Thực hiện xóa dữ liệu từ cơ sở dữ liệu
             try:
                 photo = Photo.objects.filter(id__in=delete_id)
                 photo.delete()
             except Photo.DoesNotExist:
-                pass  # Xử lý trường hợp dữ liệu không tồn tại
+                pass
 
         if request.method == 'POST' and 'edit_id' in request.POST:
             edit_id = request.POST['edit_id']
             try:
                 photo = Photo.objects.get(id=edit_id)
                 if request.method == 'POST':
-                    # Lấy thông tin sửa đổi từ request.POST và cập nhật vào đối tượng photo
                     photo = Photo.objects.get(id=edit_id)
                     photo.delete()
                     save_blog(request)
-                    return redirect('photo')  # Điều hướng người dùng đến trang bảng sau khi chỉnh sửa thành công
+                    return redirect('photo')
 
                 return render(request, 'app/input_photo.html', {'photo': photo})
             except Photo.DoesNotExist:
-                pass  # Xử lý trường hợp dữ liệu không tồn tại
+                pass
 
-        # Lấy danh sách dữ liệu từ cơ sở dữ liệu
         photos = Photo.objects.all()
 
         return render(request, 'app/tables_photo.html', {'photos': photos})
@@ -137,29 +155,26 @@ def tables(request):
             # Lấy id của dữ liệu cần xóa từ request.POST
             delete_id = request.POST.getlist('delete_id')
 
-            # Thực hiện xóa dữ liệu từ cơ sở dữ liệu
             try:
                 photo = Blog.objects.filter(id__in=delete_id)
                 photo.delete()
             except Blog.DoesNotExist:
-                pass  # Xử lý trường hợp dữ liệu không tồn tại
+                pass
 
         if request.method == 'POST' and 'edit_id' in request.POST:
             edit_id = request.POST['edit_id']
             try:
                 photo = Blog.objects.get(id=edit_id)
                 if request.method == 'POST':
-                    # Lấy thông tin sửa đổi từ request.POST và cập nhật vào đối tượng photo
                     photo = Blog.objects.get(id=edit_id)
                     photo.delete()
                     save_blog(request)
-                    return redirect('input')  # Điều hướng người dùng đến trang bảng sau khi chỉnh sửa thành công
+                    return redirect('input')
 
                 return render(request, 'app/input_blog.html', {'photo': photo})
             except Blog.DoesNotExist:
-                pass  # Xử lý trường hợp dữ liệu không tồn tại
+                pass
 
-        # Lấy danh sách dữ liệu từ cơ sở dữ liệu
         photos = Blog.objects.all()
 
         return render(request, 'app/tables_blog.html', {'photos': photos})
@@ -170,18 +185,55 @@ def tables(request):
 def users(request):
     if request.user.is_authenticated:
         if request.method == 'POST' and 'delete_id' in request.POST:
-            # Lấy id của dữ liệu cần xóa từ request.POST
             delete_id = request.POST.getlist('delete_id')
-
-            # Thực hiện xóa dữ liệu từ cơ sở dữ liệu
+            print(delete_id)
             try:
-                users = User.objects.filter(id__in=delete_id)
-                users.delete()
+                user = User.objects.filter(id__in=delete_id)
+                user.delete()
             except User.DoesNotExist:
-                pass  # Xử lý trường hợp dữ liệu không tồn tại
+                pass
+
+        if request.method == 'POST' and 'edit_id' in request.POST:
+            print(request.POST)
+            try:
+                edit_id = request.POST['edit_id']
+                photos = User.objects.get(id=edit_id)
+                form = UserUpdateForm(request.POST, instance=request.user)
+                print(form)
+                return render(request, 'app/edit_user.html', {'form': form,
+                                                              'photos': photos})
+            except User.DoesNotExist:
+                pass
+
         users = User.objects.all()
         return render(request, 'app/user.html', {'users': users})
-    return render(request, 'app/user.html', {'photos': None})
+    return render(request, 'app/user.html', {'users': None})
+
+
+def update_user(request):
+    form = UserUpdateForm(instance=request.user)  # Khởi tạo form với instance là request.user
+    value = request.user
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            context = {'form': form}
+            user = User.objects.filter(username=value)
+            user.delete()
+            return render(request, 'app/user.html', context)
+    context = {'form': form}
+    return render(request, 'app/user.html', context)
+
+
+def register(request):
+    form = CreateUserForm()
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    context = {'form': form}
+    return render(request, 'app/register.html', context)
 
 
 def category_blog(request):
@@ -191,39 +243,6 @@ def category_blog(request):
         products = Blog.objects.filter(category__slug=active_category)
     context = {'categories': categories, 'products': products, 'active_category': active_category}
     return render(request, 'app/category.html', context)
-
-
-# def search(request):
-#     if request.method == "POST":
-#         searched = request.POST["searched"]
-#         keys = Product.objects.filter(name__contains=searched)
-#
-#     if request.user.is_authenticated:
-#         customer = request.user
-#         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-#         items = order.orderitem_set.all()
-#         cartItems = order.get_cart_items
-#     else:
-#         items = []
-#         order = {'get_cart_items': 0, 'get_cart_total': 0}
-#         cartItems = order['get_cart_items']
-#     products = Product.objects.all()
-#     return render(request, 'app/search.html', {"searched": searched,
-#                                                "keys": keys,
-#                                                'products': products,
-#                                                'cartItems': cartItems}
-#                   )
-
-
-def register(request):
-    form = CreateUserForm
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    context = {'form': form}
-    return render(request, 'app/register.html', context)
 
 
 def loginA(request):
@@ -247,92 +266,7 @@ def logoutPage(request):
     return redirect('login')
 
 
-# def home(request):
-#     if request.user.is_authenticated:
-#         customer = request.user
-#         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-#         items = order.orderitem_set.all()
-#         cartItems = order.get_cart_items
-#         user_not_login = "hidden"
-#         user_login = "show"
-#     else:
-#         items = []
-#         order = {'get_cart_items': 0, 'get_cart_total': 0}
-#         cartItems = order['get_cart_items']
-#         user_not_login = "show"
-#         user_login = "hidden"
-#     products = Product.objects.all()
-#     categories = Category.objects.filter(is_sub=False)
-#     context = {'categories': categories, 'products': products, 'cartItems': cartItems, 'user_not_login': user_not_login,
-#                'user_login': user_login}
-#     return render(request, 'app/home.html', context)
-#
-#
-# def cart(request):
-#     global order
-#     if request.user.is_authenticated:
-#         customer = request.user
-#         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-#         items = order.orderitem_set.all()
-#         cartItems = order.get_cart_items
-#         user_not_login = "hidden"
-#         user_login = "show"
-#     else:
-#         items = []
-#         order = {'get_cart_items': 0, 'get_cart_total': 0}
-#         cartItems = order['get_cart_items']
-#         user_not_login = "show"
-#         user_login = "hidden"
-#     categories = Category.objects.filter(is_sub=False)
-#     context = {'categories': categories,
-#                'items': items,
-#                'order': order, 'cartItems': cartItems,
-#                'user_not_login': user_not_login,
-#                'user_login': user_login}
-#     return render(request, 'app/cart.html', context)
-#
-#
-# def checkout(request):
-#     global order
-#     if request.user.is_authenticated:
-#         customer = request.user
-#         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-#         items = order.orderitem_set.all()
-#         cartItems = order.get_cart_items
-#         user_not_login = "show"
-#         user_login = "hidden"
-#     else:
-#         items = []
-#         order = {'get_cart_items': 0, 'get_cart_total': 0}
-#         cartItems = order.get_cart_items
-#         user_not_login = "hidden"
-#         user_login = "show"
-#     categories = Category.objects.filter(is_sub=False)
-#     context = {'categories': categories,
-#                'items': items,
-#                'order': order, 'cartItems': cartItems,
-#                'user_not_login': user_not_login,
-#                'user_login': user_login}
-#     return render(request, 'app/checkout.html', context)
-#
-#
-# def updateItem(request):
-#     data = json.loads(request.body)
-#     productId = data['productId']
-#     action = data['action']
-#     customer = request.user
-#     product = Product.objects.get(id=productId)
-#     order, created = Order.objects.get_or_create(customer=customer, complete=False)
-#     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
-#     if action == 'add':
-#         orderItem.quantity += 1
-#     elif action == 'remove':
-#         orderItem.quantity -= 1
-#     orderItem.save()
-#     if orderItem.quantity <= 0:
-#         orderItem.delete()
-#     return JsonResponse('added', safe=False)
-# Create your views here.
+
 
 
 

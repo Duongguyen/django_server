@@ -60,7 +60,7 @@
                 </li>
             </ul>
         </nav>
-        <form method="post" action="{% url 'tables' %}" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'tables' %}" enctype="multipart/form-data">
             {% csrf_token %}
                     <a href="{% url '' %}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="black" class="bi bi-house-fill" viewBox="0 0 16 16" style="transform: translate(15px, 15px);">
