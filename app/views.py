@@ -61,18 +61,14 @@ def customer_tables(request):
                 customers.delete()
             except Customer.DoesNotExist:
                 pass
-
         if request.method == 'POST' and 'edit_id' in request.POST:
             edit_id = request.POST['edit_id']
             try:
                 customers = Customer.objects.get(id=edit_id)
-                if request.method == 'POST':
-                    customers = Customer.objects.get(id=edit_id)
-                    customers.delete()
-                    save_blog(request)
-                    return redirect('photo')
 
-                return render(request, 'app/customer.html', {'customers': customers})
+                return render(request, 'app/update_customer.html', {'customers': customers,
+                                                                    "id": edit_id})
+
             except Customer.DoesNotExist:
                 pass
 
@@ -81,6 +77,33 @@ def customer_tables(request):
         return render(request, 'app/tables_customer.html', {'customers': customers})
 
     return render(request, 'app/tables_customer.html', {'customers': None})
+
+
+# //EDIT CUSSTOMER
+def edit_customer(request):
+    cus = Customer.objects.all()
+
+    context = {
+        'cus': cus,
+    }
+    return render(request, 'app/update_customer.html', context)
+
+
+def update_customer(request, id):
+
+    if request.method == 'POST':
+        print("y")
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        cus = Customer(id=id,
+                       name=name,
+                       email=email,
+                       phone=phone
+                       )
+        cus.save()
+        return redirect('push')
+    return render(request, 'app/base.html')
 
 
 def blog(request):
@@ -167,7 +190,14 @@ def tables(request):
                 photo = Blog.objects.get(id=edit_id)
                 if request.method == 'POST':
                     photo = Blog.objects.get(id=edit_id)
-                    photo.delete()
+                    stt = request.POST.get('stt')
+                    category = request.POST.get('category')
+                    title = request.POST.get('title')
+                    image = request.POST.get('image')
+                    source = request.POST.get('source')
+                    description = request.POST.get('description')
+                    publication_date = request.POST.get('publication_date')
+                    name = request.POST.get('name')
                     save_blog(request)
                     return redirect('input')
 
@@ -264,10 +294,3 @@ def loginA(request):
 def logoutPage(request):
     logout(request)
     return redirect('login')
-
-
-
-
-
-
-

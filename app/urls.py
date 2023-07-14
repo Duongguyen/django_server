@@ -18,4 +18,6 @@ urlpatterns = [
     path('customer/', views.customer, name="customer"),
     path('commit/', views.save_customer, name="commit"),
     path('push/', views.customer_tables, name="push"),
+    path('edit_customer/', views.update_customer, name="edit_customer"),
+    path('update/<str:id>', views.update_customer, name="update"),
 ]
