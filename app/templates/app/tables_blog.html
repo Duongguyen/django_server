@@ -45,6 +45,62 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
+<!-- INTRO -->
+                            <div class="sb-sidenav-menu-heading">Giới thiệu</div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout1" aria-expanded="false" aria-controls="collapseLayout1">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Lời chào chủ tịch
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'greeting' %}">Danh mục lời chào</a>
+                                    <a class="nav-link" href="{% url 'list_greeting' %}">Quản lí lời chào</a>
+                                </nav>
+                            </div>
+<!-- EVENT -->
+
+                        <div class="sb-sidenav-menu-heading">Sự kiện</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout2" aria-expanded="false" aria-controls="collapseLayout2">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Sự kiện
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'event' %}">Danh mục sự kiện</a>
+                                    <a class="nav-link" href="{% url 'list_event' %}">Quản lí sự kiện</a>
+                                </nav>
+                            </div>
+
+<!-- Tổ chức -->
+                            <div class="sb-sidenav-menu-heading">Tổ chức</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout3" aria-expanded="false" aria-controls="collapseLayout3">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Sự kiện
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'event' %}">Danh mục tổ chức</a>
+                                    <a class="nav-link" href="{% url 'list_event' %}">Quản lí tổ chức</a>
+                                </nav>
+                            </div>
+
+<!-- Partner -->
+                            <div class="sb-sidenav-menu-heading">Partner</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout4" aria-expanded="false" aria-controls="collapseLayout4">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Partner
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'partner' %}">Thêm đối tác</a>
+                                    <a class="nav-link" href="{% url 'list_partner' %}">Quản lí đối tác</a>
+                                </nav>
+                            </div>
 
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout" aria-expanded="false" aria-controls="collapseLayout">
@@ -55,8 +111,8 @@
 
                             <div class="collapse" id="collapseLayout" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'input' %}">Danh mục bài viết</a>
-                                    <a class="nav-link" href="{% url 'tables' %}">Quản lí bài viết</a>
+                                    <a class="nav-link" href="{% url 'blog' %}">Danh mục bài viết</a>
+                                    <a class="nav-link" href="{% url 'list_blog' %}">Quản lí bài viết</a>
                                 </nav>
                             </div>
 
@@ -68,9 +124,8 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{% url 'photo' %}">Danh mục</a>
-                                    <a class="nav-link" href="{% url 'table' %}">Thư viện ảnh</a>
+                                    <a class="nav-link" href="{% url 'list_photo' %}">Thư viện ảnh</a>
                                 </nav>
-
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutss" aria-expanded="false" aria-controls="collapseLayoutss">
@@ -82,9 +137,8 @@
                             <div class="collapse" id="collapseLayoutss" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{% url 'customer' %}">Danh mục khách hàng</a>
-                                    <a class="nav-link" href="{% url 'push' %}">Quản lí khách hàng</a>
+                                    <a class="nav-link" href="{% url 'list_customer' %}">Quản lí khách hàng</a>
                                 </nav>
-
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -141,8 +195,8 @@
                         <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                      </svg>
 
-                <a class="dropdown-item" href="{% url 'tables' %}" style="transform: translate(87px, -10px);">Danh mục bài viết</a>
-                        <a href="{% url 'input' %}">
+                <a class="dropdown-item" href="{% url 'list_blog' %}" style="transform: translate(87px, -10px);">Danh mục bài viết</a>
+                        <a href="{% url 'blog' %}">
                             <button type="button" class="btn btn-primary" style="transform: translate(1125px, -30px); width: 9.5%">Thêm bài viết</button>
                         </a>
 
@@ -152,7 +206,7 @@
                                 Quản lí bài viết
                             </div>
                             <div class="card-body">
-                                <form method="post" action="{% url 'tables' %}">
+                                <form method="post" action="{% url 'list_blog' %}">
                                     {% csrf_token %}
                                 <table id="datatablesSimple">
                                     <thead>
@@ -184,30 +238,31 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        {% for photo in photos %}
+                                        {% for blog in blogs %}
                                         <tr>
                                           <td>
-                                              <input name="delete_id" type="checkbox" value="{{ photo.id }}">
+                                              <input name="delete_id" type="checkbox" value="{{ blog.id }}">
                                           </td>
-                                          <td>{{ photo.stt }}</td>
-                                          <td>{{ photo.category }}</td>
-                                          <td>{{ photo.title }}</td>
-                                          <td>{{ photo.source }}</td>
-                                          <td>{{ photo.poster }}</td>
-                                          <td>{{ photo.description }}</td>
-                                          <td>{{ photo.publication_date }}</td>
+                                          <td>{{ blog.stt }}</td>
+                                          <td>{{ blog.category }}</td>
+                                          <td>{{ blog.title }}</td>
+                                          <td>{{ blog.source }}</td>
+                                          <td>{{ blog.poster }}</td>
+                                          <td>{{ blog.description }}</td>
+                                          <td>{{ blog.publication_date }}</td>
                                           <td>
-                                                <img src="{{ photo.ImageURL }}" alt="{{ photo.name }}" height="30px">
+                                                <img src="{{ blog.ImageURL }}" alt="{{ blog.name }}" height="30px">
                                           </td>
                                           <td>
-                                        <button type="submit" name="delete_id" value="{{ photo.id }}" class="delete-button">
+
+                                        <button type="submit" name="delete_id" value="{{ blog.id }}" class="delete-button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
                                               <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
                                             </svg>
                                         </button>
 
-                                        <button type="submit" name="edit_id" value="{{ photo.id }}" class="edit-button">
+                                        <button type="submit" name="edit_id" value="{{ blog.id }}" class="edit-button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>

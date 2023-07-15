@@ -46,6 +46,63 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
 
+<!-- INTRO -->
+                            <div class="sb-sidenav-menu-heading">Giới thiệu</div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout1" aria-expanded="false" aria-controls="collapseLayout1">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Lời chào chủ tịch
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'greeting' %}">Danh mục lời chào</a>
+                                    <a class="nav-link" href="{% url 'list_greeting' %}">Quản lí lời chào</a>
+                                </nav>
+                            </div>
+<!-- EVENT -->
+
+                        <div class="sb-sidenav-menu-heading">Sự kiện</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout2" aria-expanded="false" aria-controls="collapseLayout2">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Sự kiện
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'event' %}">Danh mục sự kiện</a>
+                                    <a class="nav-link" href="{% url 'list_event' %}">Quản lí sự kiện</a>
+                                </nav>
+                            </div>
+
+<!-- Tổ chức -->
+                            <div class="sb-sidenav-menu-heading">Tổ chức</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout3" aria-expanded="false" aria-controls="collapseLayout3">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Sự kiện
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'event' %}">Danh mục tổ chức</a>
+                                    <a class="nav-link" href="{% url 'list_event' %}">Quản lí tổ chức</a>
+                                </nav>
+                            </div>
+
+<!-- Partner -->
+                            <div class="sb-sidenav-menu-heading">Partner</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout4" aria-expanded="false" aria-controls="collapseLayout4">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Partner
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'partner' %}">Thêm đối tác</a>
+                                    <a class="nav-link" href="{% url 'list_partner' %}">Quản lí đối tác</a>
+                                </nav>
+                            </div>
+
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout" aria-expanded="false" aria-controls="collapseLayout">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -55,8 +112,8 @@
 
                             <div class="collapse" id="collapseLayout" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'input' %}">Danh mục bài viết</a>
-                                    <a class="nav-link" href="{% url 'tables' %}">Quản lí bài viết</a>
+                                    <a class="nav-link" href="{% url 'blog' %}">Danh mục bài viết</a>
+                                    <a class="nav-link" href="{% url 'list_blog' %}">Quản lí bài viết</a>
                                 </nav>
                             </div>
 
@@ -68,9 +125,8 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{% url 'photo' %}">Danh mục</a>
-                                    <a class="nav-link" href="{% url 'table' %}">Thư viện ảnh</a>
+                                    <a class="nav-link" href="{% url 'list_photo' %}">Thư viện ảnh</a>
                                 </nav>
-
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutss" aria-expanded="false" aria-controls="collapseLayoutss">
@@ -82,9 +138,8 @@
                             <div class="collapse" id="collapseLayoutss" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{% url 'customer' %}">Danh mục khách hàng</a>
-                                    <a class="nav-link" href="{% url 'push' %}">Quản lí khách hàng</a>
+                                    <a class="nav-link" href="{% url 'list_customer' %}">Quản lí khách hàng</a>
                                 </nav>
-
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -141,7 +196,7 @@
                             <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                          </svg>
 
-                    <a class="dropdown-item" href="{% url '' %}" style="transform: translate(87px, -10px);">Danh mục bài viết</a>
+                    <a class="dropdown-item" href="{% url '' %}" style="transform: translate(87px, -10px);">Danh mục hình ảnh</a>
                         <a href="{% url 'photo' %}">
                             <button type="button" class="btn btn-primary" style="transform: translate(1125px, -30px);">Thêm hình ảnh</button>
                         </a>
@@ -152,7 +207,7 @@
                                 Quản lí bài viết
                             </div>
                             <div class="card-body">
-                                <form method="post" action="{% url 'table' %}">
+                                <form method="post" action="{% url 'list_photo' %}">
                                     {% csrf_token %}
                                 <table id="datatablesSimple">
                                     <thead>
