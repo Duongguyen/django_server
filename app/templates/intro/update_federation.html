@@ -15,7 +15,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body>
-    {% block update_group %}
+    {% block update_federation %}
     <section class="vh-100" style="background-color: #eee;">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -42,7 +42,7 @@
             </ul>
         </nav>
 
-        <form method="POST" action="/profile/group/update/{{groups.id}}" enctype="multipart/form-data">
+        <form method="POST" action="/intro/federation/update/{{federations.id}}" enctype="multipart/form-data">
             {% csrf_token %}
                     <a href="{% url '' %}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="black" class="bi bi-house-fill" viewBox="0 0 16 16" style="transform: translate(15px, 15px);">
@@ -55,38 +55,24 @@
                         <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                      </svg>
 
-                <a class="dropdown-item" href="{% url 'group' %}" style="transform: translate(87px, -10px);">Danh mục tổ chức</a>
+                <a class="dropdown-item" href="{% url 'federation' %}" style="transform: translate(87px, -10px);">Danh mục lời chào</a>
             <div class="mb-3" style="flex:2; margin:45px; ">
 
-            <div class="mb-3">
-                <label for="name_group" class="form-label">Tên sự kiện</label>
-                <input value="{{groups.name_group}}" type="text" class="form-control" id="name_group" style="width: 70%;flex:2;" name="name_group">
-            </div>
-
-            <label for="subject" class="form-label">Bộ môn</label>
-            <input value="{{groups.subject}}" type="text" class="form-control" id="subject" style="width: 70%;flex:2;" name="subject">
-
-            <form action="/upload" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="image" style="flex:2;">Chọn ảnh</label>
-                    <input value="{{groups.image}}" type="file" id="image" name="image" accept="image/*">
-                    <br>
+                    <label for="title" class="form-label">Tiêu đề</label>
+                    <input value="{{federations.title}}" type="text" class="form-control" id="title" style="width: 70%;flex:2;" name="title">
                 </div>
-            </form>
 
-            <label for="year" class="form-label">Năm thành lập</label>
-            <input value="{{groups.year}}" type="text" class="form-control" id="year" style="width: 70%;flex:2;" name="year">
+                <label for="description" class="form-label">Mô tả hình ảnh</label>
+                <textarea class="form-control" id="description" style="width: 70%; height: 150px;" name="description">{{greetings.description}}</textarea><br>
 
-            <div class="mb-3">
-                <label for="intro" class="form-label">Giới thiệu</label>
-                <textarea class="form-control" id="intro" style="width: 70%; height: 150px;" name="intro">{{events.intro}}</textarea>
-            </div>
-
-            <label for="social_network" class="form-label">Các trang mạng xã hội</label>
-            <input value="{{groups.social_network}}" type="text" class="form-control" id="social_network" style="width: 70%;flex:2;" name="social_network">
-
-            <label for="achier" class="form-label">Thành tích</label>
-            <input value="{{groups.achier}}" type="text" class="form-control" id="achier" style="width: 70%;flex:2;" name="achier">
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="image" style="flex:2;">Chọn ảnh</label>
+                        <input value="{{federations.image}}" type="file" id="image" name="image" accept="image/*">
+                        <br>
+                    </div>
+                </form>
 
                 <button type="submit">Lưu</button>
             </div>
@@ -106,6 +92,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     </section>
-        {% endblock update_group %}
+        {% endblock update_federation %}
     </body>
 </html>

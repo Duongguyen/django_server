@@ -28,9 +28,11 @@ urlpatterns = [
     path('photo/', include('app.urls_photo')),
     path('blog/', include('app.urls_blog')),
     path('intro/greeting/', include('app.urls_greeting')),
-    path('greeting/', include('app.urls_event')),
+    path('intro/federation/', include('app.urls_federation')),
+    path('event/', include('app.urls_event')),
     path('profile/group/', include('app.urls_group')),
     path('partner/', include('app.urls_partner')),
+    path('competition/', include('app.urls_competition')),
 ]
 
 

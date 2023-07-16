@@ -62,6 +62,18 @@
                                 </nav>
                             </div>
 
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout5" aria-expanded="false" aria-controls="collapseLayout5">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Giới thiệu liên đoàn
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'federation' %}">Thêm lời giới thiệu</a>
+                                    <a class="nav-link" href="{% url 'list_federation' %}">Quản lí Giới thiệu</a>
+                                </nav>
+                            </div>
+
 <!-- SỰ KIỆN -->
                             <div class="sb-sidenav-menu-heading">Sự kiện</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout2" aria-expanded="false" aria-controls="collapseLayout2">
@@ -100,6 +112,18 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{% url 'partner' %}">Thêm đối tác</a>
                                     <a class="nav-link" href="{% url 'list_partner' %}">Quản lí đối tác</a>
+                                </nav>
+                            </div>
+
+<!-- BỘ MÔN -->
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout6" aria-expanded="false" aria-controls="collapseLayout6">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Bộ môn
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout6" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'list_competition' %}">Quản lí Môn thi đấu</a>
                                 </nav>
                             </div>
 
@@ -211,6 +235,11 @@
                 {% block input_partner %}  {% endblock input_partner %}
                 {% block table_partner %}  {% endblock table_partner %}
                 {% block update_partner %}  {% endblock update_partner %}
+                {% block input_federation %}  {% endblock input_federation %}
+                {% block tables_federation %}  {% endblock tables_federation %}
+                {% block update_federation %}  {% endblock update_federation %}
+                {% block table_competition %}  {% endblock table_competition %}
+                {% block update_competition %}  {% endblock update_competition %}
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

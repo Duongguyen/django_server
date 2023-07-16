@@ -14,7 +14,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-    {% block table_event %}
+    {% block table_competition %}
     <div class="container-fluid px-0 mt-0">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -219,28 +219,23 @@
                          </svg>
 
                     <a class="dropdown-item" href="{% url '' %}" style="transform: translate(87px, -10px);">Danh mục tổ chức</a>
-                        <a href="{% url 'group' %}">
-                            <button type="button" class="btn btn-primary" style="transform: translate(1125px, -30px);">Thêm tổ chức</button>
-                        </a>
 
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Quản lí tổ chức
+                                Quản lí bộ môn
                             </div>
                             <div class="card-body">
-                                <form method="post" action="{% url 'list_group' %}">
+                                <form method="post" action="{% url 'list_competition' %}">
                                     {% csrf_token %}
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>Chọn</th>
-                                            <th>Tên tổ chức</th>
-                                            <th>Bộ môn</th>
-                                            <th>Năm thành lập</th>
-                                            <th>Các trang mạng xã hội</th>
-                                            <th>Giới thiệu</th>
-                                            <th>Thành tích</th>
+                                            <th>Tên bộ môn</th>
+                                            <th>Luật thi đấu</th>
+                                            <th>Điều lệ</th>
+                                            <th>Giới thiệu bộ môn</th>
                                             <th>Ảnh</th>
                                             <th></th>
                                         </tr>
@@ -248,41 +243,37 @@
                                     <tfoot>
                                         <tr>
                                             <th>Chọn</th>
-                                            <th>Tên tổ chức</th>
-                                            <th>Bộ môn</th>
-                                            <th>Năm thành lập</th>
-                                            <th>Các trang mạng xã hội</th>
-                                            <th>Giới thiệu</th>
-                                            <th>Thành tích</th>
+                                            <th>Tên bộ môn</th>
+                                            <th>Luật thi đấu</th>
+                                            <th>Điều lệ</th>
+                                            <th>Giới thiệu bộ môn</th>
                                             <th>Ảnh</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        {% for group in groups %}
+                                        {% for competition in competitions %}
                                         <tr>
                                           <td>
-                                              <input name="delete_id" type="checkbox" value="{{ group.id }}">
+                                              <input name="delete_id" type="checkbox" value="{{ competition.id }}">
                                           </td>
-                                          <td>{{ group.name_group }}</td>
-                                            <td>{{ group.subject }}</td>
-                                            <td>{{ group.year }}</td>
-                                            <td>{{ group.social_network }}</td>
-                                            <td>{{ group.intro }}</td>
-                                            <td>{{ group.achier }}</td>
+                                          <td>{{ competition.name }}</td>
+                                            <td>{{ competition.law }}</td>
+                                            <td>{{ competition.statute }}</td>
+                                            <td>{{ competition.intro }}</td>
                                               <td>
-                                                    <img src="{{ group.ImageURL }}" alt="{{ group.name }}" height="30px">
+                                                    <img src="{{ competition.ImageURL }}" alt="{{ competition.name }}" height="30px">
                                               </td>
                                             <td>
 
-                                        <button type="submit" name="delete_id" value="{{ group.id }}" class="delete-button">
+                                        <button type="submit" name="delete_id" value="{{ competition.id }}" class="delete-button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
                                               <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
                                             </svg>
                                         </button>
 
-                                        <button type="submit" name="edit_id" value="{{ group.id }}" class="edit-button">
+                                        <button type="submit" name="edit_id" value="{{ competition.id }}" class="edit-button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -293,7 +284,10 @@
                                         {% endfor %}
                                       </tbody>
                                 </table>
-                                    <button type="submit" class="btn btn-danger" id="deleteButton" style="position: fixed;  top: 101.5px; right: 55px;">Xóa</button>
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn btn-danger" id="deleteButton" style="position: fixed;  top: 101.5px; right: 55px;">Xóa</button>
+                                    </div>
+
                                 </form>
 
                             </div>
@@ -325,6 +319,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
         </div>
-    {% endblock table_event %}
+    {% endblock table_competition %}
     </body>
 </html>

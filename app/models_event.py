@@ -10,3 +10,14 @@ class Events(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class IntroEvent(models.Model):
+    name = models.CharField(max_length=200, null=True)
+    intro = models.TextField(null=False)
+    dates = models.DateField()
+    address = models.CharField(max_length=500, null=True)
+    times = models.TimeField()
+
+    def __str__(self):
+        return self.name
