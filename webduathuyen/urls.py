@@ -31,6 +31,12 @@ urlpatterns = [
     path('intro/federation/', include('app.urls_federation')),
     path('event/', include('app.urls_event')),
     path('profile/group/', include('app.urls_group')),
+    path('profile/athlete/', include('app.urls_athlete')),
+    path('profile/coach/', include('app.urls_coach')),
+    path('profile/referee/', include('app.urls_referee')),
+    path('library/text/', include('app.urls_text')),
+    path('library/law/', include('app.urls_law')),
+    path('library/references/', include('app.urls_references')),
     path('partner/', include('app.urls_partner')),
     path('competition/', include('app.urls_competition')),
 ]

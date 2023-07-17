@@ -5,6 +5,8 @@ from .models_event import *
 from .models_group import *
 from .models_partner import *
 from .models_competition import *
+from .models_profile import *
+from .models_library import *
 # Register your models here.
 
 admin.site.register(Blog)
@@ -20,6 +22,13 @@ admin.site.register(Events)
 admin.site.register(IntroEvent)
 
 admin.site.register(Group)
+admin.site.register(Athlete)
+admin.site.register(Coach)
+admin.site.register(Referee)
+
+admin.site.register(LibraryText)
+admin.site.register(LibraryLaw)
+admin.site.register(LibraryReferences)
 
 admin.site.register(Partner)
 

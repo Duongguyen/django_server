@@ -1,0 +1,50 @@
+use ThuVien
+select TenS from dbo.SACH
+
+select * from SACH
+
+--bạn doc HN123 mượn quá 5 ngày--
+-- 3 --
+select PHIEUMUON.TraSach 
+from BANDOC join PHIEUMUON on PHIEUMUON.MaBD = BANDOC.maBD
+where quequan = N'Hà Nội'
+-- 5 --
+select BANDOC.hoteBD
+from BANDOC join PHIEUMUON on BANDOC.maBD = PHIEUMUON.MaBD
+where BANDOC.quequan = N'Bắc Ninh' and PHIEUMUON.TraSach = 0
+
+-- 6 --
+select Top 1 hoteBD, count(PHIEUMUON.MaBD) as tong
+from BANDOC join PHIEUMUON on BANDOC.maBD = PHIEUMUON.MaBD
+where quequan = N'Hà Nội'
+group by hoteBD
+order by tong DESC
+go
+-- 7 --
+select TenS, count(TheLoai) as tong
+from SACH
+group by TenS
+
+--8--
+select TenS, NamXB
+from SACH
+where NhaXB = N'Kim Đồng' and year(NamXB) < 2010
+go
+
+--9--
+select BANDOC.hoteBD
+from BANDOC
+where BANDOC.maBD not in (select distinct PHIEUMUON.MaBD from PHIEUMUON)
+go 
+
+--10--
+select BANDOC.hoteBD, count(PHIEUMUON.MaBD) as tong
+from BANDOC join PHIEUMUON on BANDOC.maBD = PHIEUMUON.MaBD
+group by hoteBD having COUNT(PHIEUMUON.MaBD) >= 1
+go
+--11--
+select BANDOC.hoteBD, count(PHIEUMUON.MaBD) as tong
+from (BANDOC join PHIEUMUON on BANDOC.maBD = PHIEUMUON.MaBD) join Sach on Sach.maS = PHIEUMUON.MaS
+where Sach.TheLoai = N'Sách khoa học'
+group by hoteBD having COUNT(PHIEUMUON.MaBD) >= 3
+go

@@ -75,6 +75,19 @@
 
 <!-- Tổ chức -->
                             <div class="sb-sidenav-menu-heading">Profile</div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout7" aria-expanded="false" aria-controls="collapseLayout7">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Vận Động Viên
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout7" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'athlete' %}">Danh mục vận động viên</a>
+                                    <a class="nav-link" href="{% url 'list_athlete' %}">Quản lí vận động viên</a>
+                                </nav>
+                            </div>
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout3" aria-expanded="false" aria-controls="collapseLayout3">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Sự kiện
@@ -84,6 +97,70 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{% url 'event' %}">Danh mục tổ chức</a>
                                     <a class="nav-link" href="{% url 'list_event' %}">Quản lí tổ chức</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout7" aria-expanded="false" aria-controls="collapseLayout8">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Huấn luyện viên
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'coach' %}">Danh mục huấn luyện viên</a>
+                                    <a class="nav-link" href="{% url 'list_coach' %}">Quản lí huấn luyện viên</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout9" aria-expanded="false" aria-controls="collapseLayout9">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Trọng tài
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout9" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'referee' %}">Danh mục trọng tài</a>
+                                    <a class="nav-link" href="{% url 'list_referee' %}">Quản lí trọng tài</a>
+                                </nav>
+                            </div>
+
+<!-- Thư viện -->
+
+                            <div class="sb-sidenav-menu-heading">Thư viện</div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout10" aria-expanded="false" aria-controls="collapseLayout10">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                VBQP
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout10" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'text' %}">Danh mục VBQP</a>
+                                    <a class="nav-link" href="{% url 'list_text' %}">Quản lí VBQP</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout11" aria-expanded="false" aria-controls="collapseLayout11">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Luật
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout11" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'law' %}">Thêm Luật</a>
+                                    <a class="nav-link" href="{% url 'list_law' %}">Quản lí Luật thi đấu</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout12" aria-expanded="false" aria-controls="collapseLayout12">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Tài liệu tham khảo
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout12" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'references' %}">Thêm tài liệu tham khảo</a>
+                                    <a class="nav-link" href="{% url 'list_references' %}">Quản lí tài liệu tham khảo</a>
                                 </nav>
                             </div>
 

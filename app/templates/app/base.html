@@ -90,6 +90,43 @@
 
 <!-- Tổ chức -->
                             <div class="sb-sidenav-menu-heading">Profile</div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout7" aria-expanded="false" aria-controls="collapseLayout7">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Vận Động Viên
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout7" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'athlete' %}">Danh mục vận động viên</a>
+                                    <a class="nav-link" href="{% url 'list_athlete' %}">Quản lí vận động viên</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout8" aria-expanded="false" aria-controls="collapseLayout8">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Huấn luyện viên
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'coach' %}">Danh mục huấn luyện viên</a>
+                                    <a class="nav-link" href="{% url 'list_coach' %}">Quản lí huấn luyện viên</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout9" aria-expanded="false" aria-controls="collapseLayout9">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Trọng tài
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout9" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'referee' %}">Danh mục trọng tài</a>
+                                    <a class="nav-link" href="{% url 'list_referee' %}">Quản lí trọng tài</a>
+                                </nav>
+                            </div>
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout3" aria-expanded="false" aria-controls="collapseLayout3">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Tổ chức
@@ -99,6 +136,46 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{% url 'group' %}">Danh mục tổ chức</a>
                                     <a class="nav-link" href="{% url 'list_group' %}">Quản lí tổ chức</a>
+                                </nav>
+                            </div>
+
+<!-- Thư viện -->
+
+                            <div class="sb-sidenav-menu-heading">Thư viện</div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout10" aria-expanded="false" aria-controls="collapseLayout10">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                VBQP
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout10" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'text' %}">Danh mục VBQP</a>
+                                    <a class="nav-link" href="{% url 'list_text' %}">Quản lí VBQP</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout11" aria-expanded="false" aria-controls="collapseLayout11">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Luật
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout11" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'law' %}">Thêm Luật</a>
+                                    <a class="nav-link" href="{% url 'list_law' %}">Quản lí Luật thi đấu</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout12" aria-expanded="false" aria-controls="collapseLayout12">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Tài liệu tham khảo
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout12" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'references' %}">Thêm tài liệu tham khảo</a>
+                                    <a class="nav-link" href="{% url 'list_references' %}">Quản lí tài liệu tham khảo</a>
                                 </nav>
                             </div>
 <!-- Partner -->
@@ -240,6 +317,24 @@
                 {% block update_federation %}  {% endblock update_federation %}
                 {% block table_competition %}  {% endblock table_competition %}
                 {% block update_competition %}  {% endblock update_competition %}
+                {% block input_athlete %}  {% endblock input_athlete %}
+                {% block tables_athlete %}  {% endblock tables_athlete %}
+                {% block update_athlete %}  {% endblock update_athlete %}
+                {% block input_coach %}  {% endblock input_coach %}
+                {% block tables_coach %}  {% endblock tables_coach %}
+                {% block update_coach %}  {% endblock update_coach %}
+                {% block input_referee %}  {% endblock input_referee %}
+                {% block tables_referee %}  {% endblock tables_referee %}
+                {% block update_referee %}  {% endblock update_referee %}
+                {% block input_text %}      {% endblock input_text %}
+                {% block update_text %}    {% endblock update_text %}
+                {% block tables_text %}    {% endblock tables_text %}
+                {% block input_law %}  {% endblock input_law %}
+                {% block tables_law %}  {% endblock tables_law %}
+                {% block update_law %}  {% endblock update_law %}
+                {% block input_references %}  {% endblock input_references %}
+                {% block tables_references %}  {% endblock tables_references %}
+                {% block update_references %}  {% endblock update_references %}
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

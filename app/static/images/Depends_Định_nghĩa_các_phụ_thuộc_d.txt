@@ -1,0 +1,5 @@
+Depends: Định nghĩa các phụ thuộc (dependencies) của một endpoint (API)
+await: để gọi hàm bất đồng bộ
+use case - actors: những thứ tương tác với hệ thống 
+	- actions: các hành động được thực hiện với hệ thống 
+	- results: kết quả trả về khi thực hiện các hành động.

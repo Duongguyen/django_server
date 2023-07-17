@@ -16,6 +16,7 @@ def save_photo(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = PhotoForm(request.POST)
+            print(form)
             if form.is_valid():
                 photos = form.save(commit=False)
                 photos.image = request.FILES['image']
