@@ -29,7 +29,6 @@ def list(request):
     if request.user.is_authenticated:
         if request.method == 'POST' and 'delete_id' in request.POST:
             delete_id = request.POST.getlist('delete_id')
-
             try:
                 events = IntroEvent.objects.filter(id__in=delete_id)
                 events.delete()
@@ -40,7 +39,6 @@ def list(request):
             edit_id = request.POST['edit_id']
             try:
                 events = IntroEvent.objects.get(id=edit_id)
-                print(events.description)
                 return render(request, 'event/update_event.html', {'events': events,
                                                                    "id": edit_id})
 

@@ -16,7 +16,6 @@ def create(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = GroupForm(request.POST)
-            print(form)
             if form.is_valid():
                 groups = form.save(commit=False)
                 groups.image = request.FILES['image']
@@ -31,7 +30,6 @@ def list(request):
     if request.user.is_authenticated:
         if request.method == 'POST' and 'delete_id' in request.POST:
             delete_id = request.POST.getlist('delete_id')
-
             try:
                 groups = Group.objects.filter(id__in=delete_id)
                 groups.delete()
@@ -42,7 +40,6 @@ def list(request):
             edit_id = request.POST['edit_id']
             try:
                 groups = Group.objects.get(id=edit_id)
-                print(groups.description)
                 return render(request, 'group/update_group.html', {'groups': groups,
                                                                    "id": edit_id})
 

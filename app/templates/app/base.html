@@ -74,6 +74,30 @@
                                 </nav>
                             </div>
 
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout13" aria-expanded="false" aria-controls="collapseLayout13">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Tầm nhìn
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout13" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'evolution' %}">Thêm</a>
+                                    <a class="nav-link" href="{% url 'list_evolution' %}">Quản lí</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout14" aria-expanded="false" aria-controls="collapseLayout14">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Sứ mệnh
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayout14" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'mission' %}">Thêm</a>
+                                    <a class="nav-link" href="{% url 'list_mission' %}">Quản lí</a>
+                                </nav>
+                            </div>
+
 <!-- SỰ KIỆN -->
                             <div class="sb-sidenav-menu-heading">Sự kiện</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout2" aria-expanded="false" aria-controls="collapseLayout2">
@@ -302,7 +326,7 @@
                 {% block update_blog %}  {% endblock update_blog %}
                 {% block input_greeting %}  {% endblock input_greeting %}
                 {% block table_greeting %}  {% endblock table_greeting %}
-                {% block update_greeeting %}  {% endblock update_greeeting %}
+                {% block update_greeting %}  {% endblock update_greeting %}
                 {% block input_event %}  {% endblock input_event %}
                 {% block table_event %}  {% endblock table_event %}
                 {% block update_event %}  {% endblock update_event %}
@@ -335,6 +359,12 @@
                 {% block input_references %}  {% endblock input_references %}
                 {% block tables_references %}  {% endblock tables_references %}
                 {% block update_references %}  {% endblock update_references %}
+                {% block input_evolution %}  {% endblock input_evolution %}
+                {% block tables_evolution %}  {% endblock tables_evolution %}
+                {% block update_evolution %}  {% endblock update_evolution %}
+                {% block input_mission %}  {% endblock input_mission %}
+                {% block tables_mission %}  {% endblock tables_mission %}
+                {% block update_mission %}  {% endblock update_mission %}
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

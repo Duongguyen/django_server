@@ -17,6 +17,8 @@ admin.site.register(Customer)
 
 admin.site.register(Greeting)
 admin.site.register(IntroFederation)
+admin.site.register(IntroEvolution)
+admin.site.register(IntroMission)
 
 admin.site.register(Events)
 admin.site.register(IntroEvent)

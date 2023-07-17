@@ -29,6 +29,8 @@ urlpatterns = [
     path('blog/', include('app.urls_blog')),
     path('intro/greeting/', include('app.urls_greeting')),
     path('intro/federation/', include('app.urls_federation')),
+    path('intro/evolution/', include('app.urls_evolution')),
+    path('intro/mission/', include('app.urls_mission')),
     path('event/', include('app.urls_event')),
     path('profile/group/', include('app.urls_group')),
     path('profile/athlete/', include('app.urls_athlete')),
