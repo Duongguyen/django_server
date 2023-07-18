@@ -76,3 +76,6 @@ def update(request, id):
         partners.save()
         return redirect('list_partner')
     return render(request, 'app/base.html')
+
+
+

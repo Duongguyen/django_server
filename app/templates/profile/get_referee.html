@@ -9,40 +9,21 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Static Navigation - SB Admin</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{% static 'app/css/styles.css' %}" rel="stylesheet" />
+        <link rel="stylesheet" href="">
+
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            var user = '{{request.user}}'
-            function getCookie(name) {
-                let cookieValue = null;
-                if (document.cookie && document.cookie !== '') {
-                    const cookies = document.cookie.split(';');
-                    for (let i = 0; i < cookies.length; i++) {
-                        const cookie = cookies[i].trim();
-                         // Does this cookie string begin with the name we want?
-                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
-                    }
-                }
-                return cookieValue;
-            }
-                const csrftoken = getCookie('csrftoken');
-        </script>
     </head>
     <body>
-    {% block input_partner %}
+    {% block tables_referee %}
     <section class="vh-100" style="background-color: #eee;">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="{% url '' %}">Trang quản trị nội dung</a>
             <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href=""><i class="fas fa-bars"></i></button>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                {% csrf_token %}
                 <div class="input-group" style="visibility: {{user_login}}">
 
                 </div>
@@ -60,7 +41,8 @@
                 </li>
             </ul>
         </nav>
-        <form method="POST" action="{% url 'create_partner' %}" enctype="multipart/form-data">
+
+        <form method="POST" action="/profile/referee/update/{{referees.id}}" enctype="multipart/form-data">
             {% csrf_token %}
                     <a href="{% url '' %}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="black" class="bi bi-house-fill" viewBox="0 0 16 16" style="transform: translate(15px, 15px);">
@@ -73,40 +55,55 @@
                         <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                      </svg>
 
-                <a class="dropdown-item" href="#!" style="transform: translate(85.5px, -7px); font-size: 16px;">Thêm đối tác</a>
+                <a class="dropdown-item" href="#!" style="transform: translate(85.5px, -7px); font-size: 16px;">Update trọng tài</a>
 
             <div class="mb-3" style="flex:2; margin:45px; font-size: 16px;">
 
             <div class="mb-3">
-                <label for="name" class="form-label">Tên đối tác</label>
-                <input type="text" class="form-control" id="name" style="width: 70%;flex:2;" name="name">
+                <label for="fullname" class="form-label">Họ và tên</label>
+                <input value=" {{referees.fullname}} " type="text" class="form-control" id="fullname" style="width: 70%;flex:2;" name="fullname">
             </div>
 
-            <label for="address" class="form-label">Địa chỉ</label>
-            <input type="text" class="form-control" id="address" style="width: 70%;flex:2;" name="address">
+            <label for="object" class="form-label">Bộ môn</label>
+            <input value=" {{referees.object}} " type="text" class="form-control" id="object" style="width: 70%;flex:2;" name="object">
 
             <form action="/upload" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="image" style="flex:2;">Chọn ảnh</label>
-                    <input type="file" id="image" name="image" accept="image/*">
+                    <input value=" {{referees.image}} " type="file" id="image" name="image" accept="image/*">
                     <br>
                 </div>
             </form>
 
-            <label for="phone" class="form-label">Số điện thoại</label>
-            <input type="text" class="form-control" id="phone" style="width: 70%;flex:2;" name="phone">
+            <select name="sex" id="sex" class="form-select" aria-label="Default select example">
+              <option selected>Open this select menu</option>
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+            </select>
 
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <textarea class="form-control" id="email" style="width: 70%; height: 150px;" name="email"></textarea>
+                <label for="archie" class="form-label">Thành tích</label>
+                <textarea class="form-control" id="archie" style="width: 70%; height: 150px;" name="archie">{{referees.archie}}</textarea>
             </div>
 
             <label for="social_network" class="form-label">Các trang mạng xã hội</label>
-            <input type="text" class="form-control" id="social_network" style="width: 70%;flex:2;" name="social_network">
+            <input value="  {{referees.social_network}}  " type="text" class="form-control" id="social_network" style="width: 70%;flex:2;" name="social_network">
 
-                <button type="submit">Lưu</button>
+            <label for="date_of_birth" class="form-label">Ngày sinh</label>
+            <input value="  {{referees.date_of_birth}}  " type="date" class="form-control" id="date_of_birth" style="width: 70%;flex:2;" name="date_of_birth">
+
+            <label for="home_live" class="form-label">Quê quán</label>
+            <input value="  {{referees.home_live}}  " type="text" class="form-control" id="home_live" style="width: 70%;flex:2;" name="home_live">
+
+            <label for="career" class="form-label">Sự nghiệp</label>
+            <input value="  {{referees.career}}  " type="text" class="form-control" id="career" style="width: 70%;flex:2;" name="career">
             </div>
         </form>
+
+            <div class="mb-3" style="flex:40; margin:45px;">
+
+            </div>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{% static 'app/js/scripts.js' %}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -115,7 +112,8 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="{% static 'app/js/datatables-simple-demo.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
     </section>
-    {% endblock input_partner %}
+        {% endblock tables_referee %}
     </body>
 </html>

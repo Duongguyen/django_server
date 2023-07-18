@@ -82,3 +82,14 @@ def update(request, id):
         referees.save()
         return redirect('list_referee')
     return render(request, 'app/base.html')
+
+
+def get(request, id):
+    if request.method == 'GET' and 'get_id' in request.POST:
+        try:
+            partners = Referee.objects.get(id=id)
+            return render(request, 'partner/get_partner.html', {'partners': partners,
+                                                                "id": id})
+
+        except Referee.DoesNotExist:
+            pass

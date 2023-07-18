@@ -50,7 +50,7 @@ def list(request):
                 pass
 
         missions = IntroMission.objects.all()
-
+        print(missions.JSON)
         return render(request, 'intro/tables_mission.html', {'missions': missions})
 
     return render(request, 'intro/tables_mission.html', {'missions': None})

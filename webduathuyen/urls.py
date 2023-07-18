@@ -19,6 +19,7 @@ from django.urls import path, include
 
 from django.conf.urls.static import static
 from django.conf import settings
+from .router import router
 
 
 urlpatterns = [
@@ -41,6 +42,8 @@ urlpatterns = [
     path('library/references/', include('app.urls_references')),
     path('partner/', include('app.urls_partner')),
     path('competition/', include('app.urls_competition')),
+    path('competition/', include('app.urls_competition')),
+    path('GET/', include(router.urls))
 ]
 
 
