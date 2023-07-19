@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 
-from app.form import PhotoForm
-from app.models import Photo
-from app.views import loginA
+from .form import PhotoForm
+from .models import Photo
+from .views import loginA
 
 
 def photo(request):

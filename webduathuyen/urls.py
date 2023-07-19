@@ -42,7 +42,7 @@ urlpatterns = [
     path('library/references/', include('app.urls_references')),
     path('partner/', include('app.urls_partner')),
     path('competition/', include('app.urls_competition')),
-    path('competition/', include('app.urls_competition')),
+    path('contact/', include('app.urls_contact')),
     path('GET/', include(router.urls))
 ]
 

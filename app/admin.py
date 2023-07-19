@@ -7,6 +7,7 @@ from .models_partner import *
 from .models_competition import *
 from .models_profile import *
 from .models_library import *
+from .models_contact import *
 # Register your models here.
 
 admin.site.register(Blog)
@@ -35,3 +36,5 @@ admin.site.register(LibraryReferences)
 admin.site.register(Partner)
 
 admin.site.register(Competition)
+
+admin.site.register(Contact)

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 
-from app.form_profile import RefereeForm
-from app.models_profile import Referee
-from app.views import loginA
+from .form_profile import RefereeForm
+from .models_profile import Referee
+from .views import loginA
 
 
 def referee(request):
@@ -84,12 +84,3 @@ def update(request, id):
     return render(request, 'app/base.html')
 
 
-def get(request, id):
-    if request.method == 'GET' and 'get_id' in request.POST:
-        try:
-            partners = Referee.objects.get(id=id)
-            return render(request, 'partner/get_partner.html', {'partners': partners,
-                                                                "id": id})
-
-        except Referee.DoesNotExist:
-            pass
